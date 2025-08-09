@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>BINGO</h1>
+    <div id="game-controls">
+        <button id="random-mode-btn">Random Mode</button>
+        <button id="manual-mode-btn">Manual Mode</button>
+    </div>
+    <div id="bingo-grid" class="hidden"></div>
+    <button id="start-game-btn" class="hidden">Start Game</button>
+    <div id="bingo-display" class="hidden">
+        <span>B</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+        <span>O</span>
+    </div>
+    <button id="undo-btn" class="hidden">Undo Last Mark</button>
+    <div id="winner-display" class="hidden">
+        <h2>BINGO WIN!</h2>
+        <button id="restart-btn">Start a New Game</button>
+        <button id="continue-btn">Continue with Same Grid</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

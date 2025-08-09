@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+#bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 5px;
+    margin-top: 20px;
+}
+
+.grid-cell {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.grid-cell.marked {
+    background-color: #add8e6;
+}
+
+.grid-cell.winning-line {
+    background-color: #90ee90;
+}
+
+#bingo-display {
+    margin-top: 20px;
+    font-size: 48px;
+    letter-spacing: 10px;
+}
+
+#bingo-display span.cut {
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
