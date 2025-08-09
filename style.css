@@ -1,56 +1,269 @@
+/* CSS Variables for a Modern Color Scheme */
+:root {
+    --bg-color: #f4f7f9;
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --accent-color: #28a745;
+    --accent-hover: #218838;
+    --exit-color: #dc3545;
+    --exit-hover: #c82333;
+    --text-color: #333;
+    --light-text-color: #fff;
+    --grid-bg: #fff;
+    --grid-border: #dee2e6;
+    --grid-marked: #17a2b8;
+    --grid-win: #ffc107;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* General Body and Layout Styling */
 body {
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
-}
-
-#bingo-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 60px);
-    grid-gap: 5px;
-    margin-top: 20px;
-}
-
-.grid-cell {
-    width: 60px;
-    height: 60px;
-    border: 2px solid #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    background: var(--grid-bg);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Bingo Grid Styling */
+#bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.grid-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Maintain square shape */
+    border: 1px solid var(--grid-border);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
     cursor: pointer;
-    background-color: #fff;
+    background-color: var(--grid-bg);
+    transition: all 0.2s ease-in-out;
+    user-select: none; /* Prevents text selection on click */
+}
+
+.grid-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .grid-cell.marked {
-    background-color: #add8e6;
+    background-color: var(--grid-marked);
+    color: var(--light-text-color);
+    transform: scale(0.95);
 }
 
 .grid-cell.winning-line {
-    background-color: #90ee90;
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+    animation: pulse 0.6s infinite alternate;
 }
 
+@keyframes pulse {
+    to { transform: scale(1.05); }
+}
+
+/* BINGO Word Display */
 #bingo-display {
-    margin-top: 20px;
-    font-size: 48px;
-    letter-spacing: 10px;
+    margin: 20px 0;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 15px;
 }
 
 #bingo-display span.cut {
     text-decoration: line-through;
-    color: #ccc;
+    color: var(--grid-border);
+    opacity: 0.6;
 }
 
+/* Buttons Styling */
+.controls-wrapper, .winner-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Spacing for the in-game buttons container */
+#in-game-buttons {
+    margin-top: 15px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    color: var(--light-text-color);
+    background-color: var(--primary-color);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+#undo-btn {
+    background-color: var(--secondary-color);
+}
+#undo-btn:hover {
+    background-color: var(--secondary-hover);
+}
+
+#winner-display button {
+    background-color: var(--accent-color);
+}
+#winner-display button:hover {
+    background-color: var(--accent-hover);
+}
+#winner-display button#continue-btn {
+    background-color: var(--secondary-color);
+}
+#winner-display button#continue-btn:hover {
+     background-color: var(--secondary-hover);
+}
+
+/* Exit Button Style */
+button.exit-btn {
+    background-color: var(--exit-color);
+}
+button.exit-btn:hover {
+    background-color: var(--exit-hover);
+}
+
+
+/* Helper Classes */
 .hidden {
     display: none !important;
 }
 
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+/* Winner Display */
+#winner-display h2 {
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    animation: fadeIn 1s;
+}
+
+/* Notifications & Dialogs */
+.notification, .dialog-overlay {
+    position: fixed;
+    z-index: 1000;
+}
+
+.notification {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    animation: slideInUp 0.5s ease-out, fadeOut 0.5s ease-out 2.5s forwards;
+}
+
+.dialog-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.dialog-box p {
+    margin: 0 0 20px;
+    font-size: 1.1rem;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.dialog-buttons button {
+    background-color: var(--primary-color);
+}
+
+.dialog-buttons button.cancel {
+    background-color: var(--secondary-color);
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from { transform: translate(-50%, 100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; display: none; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 15px;
+    }
+    .grid-cell {
+        font-size: 1.2rem;
+        gap: 5px;
+    }
+    #bingo-display {
+        font-size: 2rem;
+        letter-spacing: 10px;
+    }
+    button {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
 }
